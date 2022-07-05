@@ -48,7 +48,7 @@
                                                     <Input id="idCustomer" rows="4" />
                                                     <Label text="Po Number" />
                                                     <Input id="idPo" rows="4" />
-                                                    <Label text="Inquiry Number" />
+                                                    <Label text="Inquiry No." />
                                                     <Input id="idInqNumber" rows="4" />
                                                 </form:content>
                                             </form:SimpleForm>
