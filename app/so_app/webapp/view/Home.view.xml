@@ -7,7 +7,12 @@
             <pages>
                 <Page id="page" title="{i18n>title}">
                     <content>
-                        <Table items="{ path: 'mainModel>/SalesOrderSet', sorter: { path: 'mainModel>soNumber' }}" id="table0" mode="SingleSelectLeft" selectionChange="onSelect">
+                        <Table items="{ path: 'mainModel>/SalesOrderSet', sorter: { path: 'mainModel>soNumber' }}" 
+                               id="table0" mode="SingleSelectLeft" 
+                               selectionChange="onSelect" 
+                               growing="true"
+							   growingThreshold="10"
+                         >
                             <headerToolbar>
                                 <OverflowToolbar>
                                     <content>

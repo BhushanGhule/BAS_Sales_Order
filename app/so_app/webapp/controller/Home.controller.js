@@ -1,11 +1,12 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/m/MessageToast"
+    "sap/m/MessageToast",
+    "sap/m/MessageBox"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, MessageToast) {
+    function (Controller, MessageToast, MessageBox) {
         "use strict";
 
         return Controller.extend("com.sap.soapp.controller.Home", {
@@ -18,7 +19,7 @@ sap.ui.define([
             onCancelDialog: function (oEvent) {
                 oEvent.getSource().getParent().close();
             },
-            onCreate: function () {
+            onCreate: function (oEvent) {
                 var oSo = this.getView().byId("idSo").getValue();
                 if (oSo !== "") {
                     const oList = this._oTable;
@@ -38,14 +39,16 @@ sap.ui.define([
 
                 } else {
                     MessageToast.show("So cannot be blank");
-                }
-
+                 }
+                 this.refreshTable();
+                 oEvent.getSource().getParent().close();
             },
             onEditMode: function () {
                 this.byId("editModeButton").setVisible(false);
                 this.byId("saveButton").setVisible(true);
                 this.byId("deleteButton").setVisible(true);
                 this.rebindTable(this.oEditableTemplate, "Edit");
+                this.refreshTable();
             },
             onDelete: function(){
 
@@ -61,7 +64,21 @@ sap.ui.define([
                 } else {
                     MessageToast.show("Please Select a Row to Delete");
                 }
-                
+                this.refreshTable();
+            },
+            refreshTable : function (params) {
+             //   sap.ui.getCore().byId("table0").getModel("mainModel").refresh(true) 
+             var oBinding = this.byId("table0").getBinding("items");
+
+             if (oBinding.hasPendingChanges()) {
+                 MessageBox.error(this._getText("refreshNotPossibleMessage"));
+                 return;
+             }
+             oBinding.refresh();
+
+            },
+            _getText : function (sTextId, aArgs) {
+                return this.getOwnerComponent().getModel("i18n").getResourceBundle().getText(sTextId, aArgs);
             }
 
         });

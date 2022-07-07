@@ -7,11 +7,11 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^5",
-    "express": "^4"
+    "express": "^4",
+    "hdb": "^0.19.3"
   },
   "devDependencies": {
-    "@sap/ux-specification": "^1.102.0",
-    "sqlite3": "^5.0.2"
+    "@sap/ux-specification": "^1.102.0"
   },
   "scripts": {
     "start": "cds run",
@@ -45,11 +45,16 @@
   "cds": {
     "requires": {
       "db": {
-        "kind": "sqlite",
-        "credentials": {
-          "database": "sales.db"
-        }
+        "kind": "hana",
+        "model": [
+          "db/",
+          "srv/",
+          "app/"
+        ]
       }
+    },
+    "hana" : {
+        "deploy-format" : "hdbtable"
     }
   },
   "sapux": [

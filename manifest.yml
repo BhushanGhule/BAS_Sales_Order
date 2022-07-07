@@ -1,0 +1,18 @@
+---
+applications:
+  - name: SalesOrder-db-deployer
+    path: ./gen/db
+    no-route: true
+    health-check-type: process
+    memory: 256M
+    buildpacks:
+      - nodejs_buildpack
+    services:
+      - saleshdb
+
+  - name: capmSales
+    path: .
+    ramdon-route: true
+    memory: 256M
+    services:
+      - saleshdb    
