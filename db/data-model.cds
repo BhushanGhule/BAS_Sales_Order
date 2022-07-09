@@ -1,6 +1,9 @@
 namespace SalesOrder.db;
+using { managed } from '@sap/cds/common';
 
-entity SalesOrders {
+
+
+entity SalesOrders : managed {
     key soNumber   : String(10)
             @mandatory
             @title : 'Sales Order Number';
